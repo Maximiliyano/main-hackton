@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        // завантаження об'єктів, анім, колізія
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-        // стрибок
+        // СЂСѓС…
         if (horizontalInput > 0.01f)
             transform.localScale = Vector3.one;
         else if (horizontalInput < -0.01f)
@@ -31,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && IsGrounded())
             Jump();
 
-        // анімації
+        // Р°РЅС–РјР°С†С–С—
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("grounded", IsGrounded());
     }
@@ -47,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    // слой маска + фізика стін
+    // СЃР»РѕР№ РјР°СЃРєР° + С„С–Р·РёРєР° СЃС‚С–РЅ
     private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
